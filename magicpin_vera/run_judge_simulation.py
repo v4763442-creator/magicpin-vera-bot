@@ -49,14 +49,23 @@ class OfflineHeuristicJudgeLLM(LLMProvider):
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Run Judge Simulator against live bot")
+    parser.add_argument("--url", type=str, default="http://localhost:8080", help="URL of live bot")
+    args = parser.parse_args()
+
+    import judge_simulator
+    judge_simulator.BOT_URL = args.url.rstrip("/")
+
     llm = OfflineHeuristicJudgeLLM()
     judge = JudgeSimulator(llm)
+    judge.client = judge_simulator.BotClient(args.url.rstrip("/"))
 
     # Clean state before starting warmup
     judge.client._request("POST", "/v1/teardown")
 
     print("\n" + "=" * 70)
-    print("RUNNING OFFICIAL JUDGE SIMULATOR SCENARIOS AGAINST LIVE BOT")
+    print(f"RUNNING OFFICIAL JUDGE SIMULATOR SCENARIOS AGAINST {args.url}")
     print("=" * 70)
 
     # Run the full test suite from judge_simulator
