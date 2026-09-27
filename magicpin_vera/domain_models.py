@@ -351,10 +351,10 @@ class HealthzResponse(BaseModel):
 
 
 class MetadataResponse(BaseModel):
-    team_name: str = "Antigravity Team"
-    team_members: List[str] = Field(default_factory=lambda: ["Lead Engineer"])
+    team_name: str = "vivek_ai"
+    team_members: List[str] = Field(default_factory=lambda: ["Vivek"])
     model: str = "vera-grounded-deterministic-v2"
     approach: str = "Context-grounded 8-stage decision & composition engine with dynamic voice alignment"
-    contact_email: str = "team@magicpin-challenge.internal"
+    contact_email: str = "vivek_23cs465@dtu.ac.in"
     version: str = "2.0.0"
     submitted_at: str = "2026-04-26T08:00:00Z"
