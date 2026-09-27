@@ -35,6 +35,20 @@ app = FastAPI(title="Magicpin Vera AI Engine", version="2.0.0")
 START_TIME = time.time()
 
 
+@app.get("/")
+async def root():
+    return {
+        "service": "Magicpin Vera AI Engine",
+        "status": "online",
+        "team": "vivek_ai",
+        "endpoints": {
+            "health": "/v1/healthz",
+            "metadata": "/v1/metadata",
+            "docs": "/docs"
+        }
+    }
+
+
 # =============================================================================
 # 1. HEALTHZ & METADATA
 # =============================================================================
